@@ -16,6 +16,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.mimaps.databinding.ActivityMapsBinding;
@@ -79,7 +80,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapLongClick(LatLng latLng) {
         Toast.makeText(MapsActivity.this, "Click Posicion"+latLng.latitude+latLng.longitude, Toast.LENGTH_SHORT).show();
-        mMap.addMarker(new MarkerOptions().position(latLng).title("Mi Ubicacion"));
+        mMap.addMarker(new MarkerOptions().position(latLng).title("Mi Ubicacion").icon(BitmapDescriptorFactory.fromResource(R.drawable.googleg_disabled_color_18)));
         guardarPreferencias(latLng);
     }
 
@@ -96,7 +97,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         double log=preferences.getFloat("longitud",0);
         if (lat!=0){
             LatLng puntoPref=new LatLng(lat,log);
-            mMap.addMarker(new MarkerOptions().position(puntoPref).title("Mi ubicacion"));
+            mMap.addMarker(new MarkerOptions().position(puntoPref).title("Mi ubicacion").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(puntoPref));
         }else{
             AlertDialog.Builder alert=new AlertDialog.Builder(this);
